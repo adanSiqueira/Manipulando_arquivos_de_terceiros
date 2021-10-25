@@ -1,0 +1,44 @@
+with open("economic-indicators.csv", "r") as boston:
+    voos_total = 0
+    lista = []
+    total_passageiros = 0
+    maior_media = 0
+    maior_diaria = 0
+    ano_usuario = int(input("Digite o ano que deseja pesquisar (2013 ou 2014): "))
+
+    while( (ano_usuario != 2013) and (ano_usuario != 2014)):
+        ano_usuario = float(input("Digite o ano que deseja pesquisar (2013 ou 2014): "))
+
+    for linha in boston.readlines()[1:-1]:
+        voos_total = voos_total + float(linha.split(",")[3])
+        lista.append(float(linha.split(",")[2]))
+    print ("O total de voos internacionais que partiram do aeroporto de Logan no ano de 2014 foi: ", voos_total)
+
+    maior_mes = lista.index(max(lista))
+    if (maior_mes == 0):
+        maior_mes = maior_mes + 1
+        print("O mês/ano com maior trânsito de passageiros foi o mês ", maior_mes, " de ", ano_usuario)
+    if (maior_mes <= 11):
+        print("O mês/ano com maior trânsito de passageiros foi o mês ",maior_mes, " de ", ano_usuario)
+    else:
+        maior_mes = maior_mes - 11
+        print("O mês/ano com maior trânsito de passageiros foi o mês ",maior_mes, " de ", ano_usuario)
+
+    if (ano_usuario == 2013):
+        print("O numero total de passageiros que passaram pelo aeroporto de Logan em", ano_usuario, "foi ", sum(lista[0:11]))
+    else:
+        print("O numero total de passageiros que passaram pelo aeroporto de Logan em", ano_usuario, "foi ",
+              sum(lista[12:23]))
+
+    lista.clear()
+
+    lista.append(float(linha.split(",")[5]))
+    maior_diaria = lista.index(max(lista))
+    if (maior_diaria == 0):
+        maior_diaria = maior_diaria + 1
+        print("O mês/ano com maior média da diária de um hotel foi o mês ", maior_diaria, " de ", ano_usuario)
+    elif (maior_diaria > 0 and maior_diaria <= 11):
+        print("O mês/ano com maior média da diária de um hotel foi o mês ",maior_diaria, " de ", ano_usuario)
+    else:
+        maior_diaria = maior_diaria - 11
+        print("O mês/ano com maior média da diária de um hotel foi o mês ",maior_diaria, " de ", ano_usuario)
